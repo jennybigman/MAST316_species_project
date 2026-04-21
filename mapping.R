@@ -9,6 +9,7 @@
   library(tidyverse)
   library(sf)
   library(rnaturalearth)
+  library(rnaturalearthdata)
   library(maps)
 
   #### 1. set working directory to where your data is ####
