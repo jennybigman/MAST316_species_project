@@ -4,7 +4,7 @@
   # if this is your first time loading the libraries, you have to install them first
   if (!requireNamespace("pak", quietly = TRUE)) 
       install.packages("pak")
-      pak::pkg_install(c("tidyverse", "sf", "rnaturalearth", "maps"))
+      pak::pkg_install(c("tidyverse", "sf", "rnaturalearth", "rnaturalearthdata", "maps"))
 
   library(tidyverse)
   library(sf)
