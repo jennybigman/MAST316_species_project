@@ -4,13 +4,21 @@
   # if this is your first time loading the libraries, you have to install them first
   if (!requireNamespace("pak", quietly = TRUE)) 
       install.packages("pak")
-      pak::pkg_install(c("tidyverse", "sf", "rnaturalearth", "rnaturalearthdata", "maps"))
+      pak::pkg_install(c("tidyverse", 
+                         "sf", 
+                         "rnaturalearth", 
+                         "rnaturalearthdata", 
+                         "maps"))
+      
+  # install.packages("devtools")
+  devtools::install_github("seananderson/ggsidekick")
 
   library(tidyverse)
   library(sf)
   library(rnaturalearth)
   library(rnaturalearthdata)
   library(maps)
+  library(ggsidekick)
 
   #### 1. set working directory to where your data is ####
   
