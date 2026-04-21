@@ -35,6 +35,10 @@
   #  filter(Year >= 1960)
   
  #### 4. start mapping
+      
+  dat_sf <- st_as_sf(dat,
+    coords = c("Longitude", "Latitude"),
+    crs = 4326)
   
   # map just the lat/longs
   ggplot(dat_sf) +
