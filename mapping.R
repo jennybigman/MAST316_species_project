@@ -8,7 +8,8 @@
                          "sf", 
                          "rnaturalearth", 
                          "rnaturalearthdata", 
-                         "maps"))
+                         "maps",
+                         "devtools"))
       
   # install.packages("devtools")
   devtools::install_github("seananderson/ggsidekick")
@@ -19,16 +20,19 @@
   library(rnaturalearthdata)
   library(maps)
   library(ggsidekick)
+  # library(here)
 
   #### 1. set working directory to where your data is ####
   
   # here I have a folder on my desktop called MAST 316 data. My cleaned and sorted dataset is here. 
-  setwd("~/Desktop/MAST 316 data/")
+  setwd("~/Desktop/MAST 316 data/") # for MAC
+  setwd("")
   
   #### 2. Load data ####
   
   dat <- read_csv("Pterois_volitans_time_depth_invasivestatus_sorted.csv")
-
+  # dat <- read_csv("busycon_carica_qualifiers_sorted_cleaned_humanobs.csv")
+  
   #### 3. check data ####
   
   glimpse(dat)
@@ -55,6 +59,7 @@
   
   # add a map
   world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
+  states <- ne_states(country = "United States of America", returnclass = "sf")
 
   # plot points + world map
   ggplot() +
@@ -86,7 +91,8 @@
     geom_sf(data = dat_sf, color = "black", alpha = 0.6, size = 1) +
     xlab("Longitude") +
     ylab("Latitude") + 
-    ggsidekick::theme_sleek()
+    theme_bw()
+   # ggsidekick::theme_sleek()
  
    # if you want to change the map color, do so with this code:
   ggplot() +
@@ -103,11 +109,13 @@
   
   ggplot() +
     geom_sf(data = world, fill = "grey", color = "white") +
+    geom_sf(data = states, fill = NA, color = "black", size = 0.2, alpha = 0.5) +
     geom_sf(data = dat_sf, color = "black", alpha = 0.6, size = 1) +
-    coord_sf(xlim = c(40, 50), ylim = c(5, 15)) +
+    coord_sf(xlim = c(-83, -64), ylim = c(25, 48)) +
     xlab("Longitude") +
     ylab("Latitude") + 
-    ggsidekick::theme_sleek()
+    ggsidekick::theme_sleek() +
+    theme(panel.grid.major = element_line())
   
   # save file
   
@@ -137,3 +145,18 @@
   ggsave(species_map, file = "species_map.png",
          dpi = 300, height = 10, width = 20, units = "in")
  
+  # alexandria's map
+  
+  ap_map <-  ggplot() +
+    geom_sf(data = world, fill = "grey", color = "white") +
+    geom_sf(data = states, fill = NA, color = "black", size = 0.2, alpha = 0.5) +
+    geom_sf(data = dat_sf, color = "black", alpha = 0.6, size = 1) +
+    coord_sf(xlim = c(-83, -64), ylim = c(25, 48)) +
+    xlab("Longitude") +
+    ylab("Latitude") + 
+    ggsidekick::theme_sleek() +
+    theme(panel.grid.major = element_line())
+  
+  ggsave(ap_map, file = "./knobbed whelks/ap_map.png",
+         height = 6, width = 4)
+  
